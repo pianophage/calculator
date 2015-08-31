@@ -1,26 +1,16 @@
 # Makefile.
 
-prog = calculator
-objs = calculator.o evaluator.o scanner.o
+progs = calculator
 libs = -lreadline
 flags = -std=gnu++14 -Wall -Wextra -Werror -g
 cxx = g++
 
-%.o: %.cc
-	$(cxx) $(flags) -o $@ -c $<
-
-%: %.o
-	$(cxx) -o $@ $^ $(libs)
-
 .PHONY: all
-all: $(prog)
+all: $(progs)
 
-$(prog): $(objs)
-
-calculator.o: calculator.cc
-evaluator.o: evaluator.cc
-scanner.o: scanner.cc
+calculator: calculator.cc
+	$(cxx) $(flags) -o $@ $< $(libs)
 
 .PHONY: clean
 clean:
-	-rm -f $(prog) $(objs) core
+	-rm -f $(progs) core
